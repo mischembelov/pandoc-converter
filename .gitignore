@@ -1,0 +1,23 @@
+# Виртуальное окружение
+.venv/
+
+# Рабочие папки с файлами (не коммитим сами документы)
+input/
+input_md/
+input_pdf/
+output/
+output_docx/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# PyCharm
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
