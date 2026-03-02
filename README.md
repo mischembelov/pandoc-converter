@@ -102,9 +102,27 @@ python setup.py
 
 ---
 
+## 🪟 Готовый `.exe` для Windows
+
+Для пользователей Windows доступен готовый исполняемый файл, собранный из этого репозитория.
+
+### Как скачать и запустить
+
+1. Открой страницу проекта на GitHub:  
+   `https://github.com/mischembelov/pandoc-converter`
+2. Перейди в раздел **Releases** (если есть) или в **Code → dist/**.
+3. Скачай файл `Pandoc Converter.exe`.
+4. Перемести его в удобную папку (например, `C:\Programs\PandocConverter\`).
+5. Запусти двойным кликом по `Pandoc Converter.exe`.
+
+> При первом запуске Windows может показать предупреждение SmartScreen.  
+> Нажми «Подробнее» → «Выполнить в любом случае», если доверяешь источнику.
+
+---
+
 ## 🖥 Шаг 3. Использование GUI-приложения (рекомендуется для пользователей)
 
-### Запуск GUI
+### Запуск GUI из исходников (Windows)
 
 Из корня проекта при активном виртуальном окружении:
 
@@ -131,7 +149,7 @@ python app.py
 
 ### Сценарий использования GUI
 
-1. Запусти `python app.py`.
+1. Запусти `python app.py` или готовый `Pandoc Converter.exe`.
 2. Перетащи файлы в зону Drag & Drop или нажми «Выбрать файлы».
 3. Выбери режим конвертации.
 4. Нажми «Конвертировать».
@@ -141,6 +159,84 @@ python app.py
    - Нажми «Сохранить файл как (в Загрузки)», чтобы положить последнюю конвертацию в `Downloads`.
 
 > Ограничение: «Сохранить файл как (в Загрузки)» всегда берёт **последний успешно сконвертированный файл** в текущем запуске.
+
+---
+
+## 🍏 Запуск на macOS
+
+Готового `.app` / `.dmg` в репозитории пока нет, но приложение можно запустить из исходников.
+
+### Вариант 1. Запуск через Python (проще всего)
+
+1. Установить **Homebrew** (если ещё не установлен):  
+   [https://brew.sh](https://brew.sh)
+2. Установить Python 3:
+
+   ```bash
+   brew install python
+   ```
+
+3. Клонировать репозиторий:
+
+   ```bash
+   git clone https://github.com/mischembelov/pandoc-converter.git
+   cd pandoc-converter
+   ```
+
+4. Создать и активировать виртуальное окружение:
+
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+5. Установить зависимости:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+6. Установить Pandoc:
+
+   ```bash
+   brew install pandoc
+   ```
+
+7. Запустить GUI:
+
+   ```bash
+   python3 app.py
+   ```
+
+Откроется то же самое окно **Pandoc Converter**, что и на Windows.
+
+### Вариант 2. Сборка `.app` (для двойного клика)
+
+Если вы на macOS и хотите полноценное приложение:
+
+1. Установите PyInstaller:
+
+   ```bash
+   pip install pyinstaller
+   ```
+
+2. В корне проекта выполните:
+
+   ```bash
+   pyinstaller --windowed --name "Pandoc Converter" app.py
+   ```
+
+3. В папке `dist/` появится:
+
+   ```text
+   dist/
+   └── Pandoc Converter.app
+   ```
+
+Его можно запускать двойным кликом и перенести в `/Applications`.
+
+> macOS может блокировать запуск приложений не из App Store.  
+> В этом случае откройте «System Settings → Privacy & Security» и разрешите запуск приложения.
 
 ---
 
@@ -239,8 +335,11 @@ pandoc: command not found
 2. Если не найден — установи вручную:
 
    - Windows: скачай `.msi` с [pandoc.org/installing.html](https://pandoc.org/installing.html) и установи.
+   - macOS: `brew install pandoc`.
 
 3. После установки перезапусти терминал / IDE.
+
+---
 
 ### Ошибка `ModuleNotFoundError` для библиотек
 
@@ -258,6 +357,8 @@ ModuleNotFoundError: No module named 'pdf2docx'
    ```powershell
    pip install -r requirements.txt
    ```
+
+---
 
 ### PDF конвертируется «криво» или пустой DOCX
 
